@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:animer/homePage.dart';
+import 'package:animer/screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,13 +20,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final List<MyTabs> _tabs = [
-    new MyTabs(title: "Home", icon: Icon(Icons.home)),
-    new MyTabs(title: "Search", icon: Icon(Icons.search)),
+    new MyTabs(title: "Anime", icon: Icon(Icons.home)),
+    new MyTabs(title: "New", icon: Icon(Icons.description)),
     new MyTabs(title: "Favorite", icon: Icon(Icons.favorite)),
     new MyTabs(title: "More", icon: Icon(Icons.more_horiz))
   ];
-  MyTabs _myHandler ;
-  TabController _tabController ;
+  MyTabs _myHandler;
+  TabController _tabController;
 
   tabMaker() {
     List<Tab> tabs = List();
@@ -53,21 +53,23 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-//      appBar: new AppBar(
-//        title: new Text(_myHandler.title),
-//        flexibleSpace: Container(
-//            decoration: BoxDecoration(
-//                gradient: LinearGradient(
-//                    colors: [Colors.pink[200], Colors.cyan],
-//                    stops: [0.5, 1.0]
-//                )
-//            )
-//        ),
-//      ),
+      appBar: AppBar(
+        title: Text(
+          _myHandler.title,
+        ),
+        flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.pink[200], Colors.cyan],
+                    stops: [0.5, 1.0]
+                )
+            )
+        ),
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.cyan[200], Colors.pink],
+                colors: [Colors.cyan[200], Colors.pink[200]],
                 stops: [0.5, 1.0]
             )
         ),
@@ -84,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          HomePage(),
+          HomeScreen(),
           Container(child: Icon(Icons.search)),
           Container(child: Icon(Icons.favorite)),
           Container(child: Icon(Icons.more_horiz)),

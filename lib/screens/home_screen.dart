@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        backgroundColor: Colors.black87,
-        appBar: AppBar(
-          title: Text('Anime'),
-          flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.pink[200], Colors.cyan],
-                      stops: [0.5, 1.0]
-                  )
-              ),
-          ),
-        ),
+      backgroundColor: Colors.black87,
       body: ListView(
         children: <Widget>[
           imageSlider(context),
-          genresSlider(context),
+          searchInput(),
+          genres(context),
           movieList(context)
         ],
       )
@@ -31,11 +21,11 @@ class HomePage extends StatelessWidget {
 
 Widget imageSlider(context) {
   final imageList = [
-    'assets/images/overlord-ss4.jpeg',
+    'assets/images/my-hero-academia.png',
     'assets/images/one-piece.jpeg',
+    'assets/images/overlord-ss4.jpeg',
     'assets/images/naruto.jpeg',
     'assets/images/bleach.jpeg',
-    'assets/images/my-hero-academia.png',
     'assets/images/one-punch-man.png',
     'assets/images/jujutsu-kaisen.jpeg',
     'assets/images/kimetsu-no-yaiba.jpeg',
@@ -44,8 +34,8 @@ Widget imageSlider(context) {
   ];
 
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 10.0),
-    constraints: BoxConstraints.expand(height: 320),
+    height: MediaQuery.of(context).size.height / 2.5,
+    margin: EdgeInsets.symmetric(vertical: 10),
     child: Row(
       children: <Widget>[
         Expanded(
@@ -53,10 +43,10 @@ Widget imageSlider(context) {
             itemBuilder: (BuildContext context, int index) {
               return Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3.0),
+                  borderRadius: BorderRadius.circular(1.0),
                 ),
-                elevation: 3,
-                shadowColor: Colors.white,
+                elevation: 2,
+                shadowColor: Colors.white.withOpacity(0.8),
                 child: Image.asset(
                   imageList[index],
                   fit: BoxFit.fitHeight
@@ -74,7 +64,7 @@ Widget imageSlider(context) {
   );
 }
 
-Widget genresSlider(context) {
+Widget genres(context) {
   final List<String> genres = <String>[
     'Action',
     'Adventure',
@@ -96,34 +86,34 @@ Widget genresSlider(context) {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(genres.length, (index) {
             return Container(
-              width: 120.0,
-              height: 60.0,
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: index % 2 != 0 ? [Colors.pink[200], Colors.pinkAccent]
-                      : [Colors.cyan[200], Colors.cyanAccent],
-                  stops: [0.5, 1.0],
-                  begin: FractionalOffset.topCenter,
-                  end: FractionalOffset.bottomCenter
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black45.withOpacity(0.8),
-                    blurRadius: 5,
-                    offset: Offset(5, 15),
+                width: 120.0,
+                height: 30.0,
+                margin: EdgeInsets.symmetric(horizontal: 5),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: index % 2 != 0 ? [Colors.pink[200], Colors.pinkAccent]
+                          : [Colors.cyan[200], Colors.green],
+                      stops: [0.5, 1.0],
+                      begin: FractionalOffset.topCenter,
+                      end: FractionalOffset.bottomCenter
                   ),
-                ],
-              ),
-              child: FlatButton(
-                onPressed: () {},
-                child: Text(
-                  genres[index],
-                  style: TextStyle(
-                    color: index % 2 != 0 ? Colors.white : Colors.black
-                  )
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white.withOpacity(0.8),
+                      blurRadius: 5,
+                      offset: Offset(3, 15),
+                    ),
+                  ],
+                ),
+                child: FlatButton(
+                    onPressed: () {},
+                    child: Text(
+                        genres[index],
+                        style: TextStyle(
+                            color: index % 2 != 0 ? Colors.white : Colors.black
+                        )
+                    )
                 )
-              )
             );
           })
       ),
@@ -131,10 +121,54 @@ Widget genresSlider(context) {
   );
 }
 
+Widget searchInput() {
+  return Container(
+    margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
+    child: Row(
+      children: <Widget>[
+        Expanded(
+            child: TextField(
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.grey,
+                ),
+                hintText: 'Search Anime',
+                hintStyle: TextStyle(
+                  color: Colors.grey
+                ),
+                filled: true,
+                fillColor: Colors.white24,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: Colors.white
+                  )
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 0,
+                ),
+              ),
+            )
+        )
+      ],
+    ),
+  );
+}
+
 Widget movieList(context) {
   final list = [
     {
-      'title': 'mới cập nhật',
+      'title': 'update',
       'movies': [
         {
           'name': 'Overlord',
@@ -179,7 +213,7 @@ Widget movieList(context) {
       ]
     },
     {
-      'title': 'sắp chiếu',
+      'title': 'coming soon',
       'movies': [
         {
           'name': 'Overlord',
@@ -224,52 +258,7 @@ Widget movieList(context) {
       ]
     },
     {
-      'title': 'đề cử',
-      'movies': [
-        {
-          'name': 'Overlord',
-          'thumb': 'assets/images/overlord-ss4.jpeg'
-        },
-        {
-          'name': 'One Piece',
-          'thumb': 'assets/images/one-piece.jpeg'
-        },
-        {
-          'name': 'Naruto Shippuden',
-          'thumb': 'assets/images/naruto.jpeg'
-        },
-        {
-          'name': 'Bleach',
-          'thumb': 'assets/images/bleach.jpeg'
-        },
-        {
-          'name': 'My Hero Academia',
-          'thumb': 'assets/images/my-hero-academia.png'
-        },
-        {
-          'name': 'One Punch Man',
-          'thumb': 'assets/images/one-punch-man.png'
-        },
-        {
-          'name': 'Jujutsu Kaisen',
-          'thumb': 'assets/images/jujutsu-kaisen.jpeg'
-        },
-        {
-          'name': 'Kimetsu no Yaiba',
-          'thumb': 'assets/images/kimetsu-no-yaiba.jpeg'
-        },
-        {
-          'name': 'Fairy Tail',
-          'thumb': 'assets/images/fairy-tail.jpeg'
-        },
-        {
-          'name': 'Black Clover',
-          'thumb': 'assets/images/black-clover.jpeg'
-        },
-      ]
-    },
-    {
-      'title': 'tin tức',
+      'title': 'trending',
       'movies': [
         {
           'name': 'Overlord',
@@ -370,23 +359,44 @@ moviesMaker(list) {
     children.add(
       Container(
         width: 150.0,
-        height: 200.0,
+        height: 230.0,
         margin: EdgeInsets.symmetric(horizontal: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: Container(
-                child: Image.asset(
-                  list[i]['thumb'],
-                  fit: BoxFit.fitHeight,
-                ),
+              child: Stack(
+                fit: StackFit.passthrough,
+                children: <Widget>[
+                  Image.asset(
+                    list[i]['thumb'],
+                    fit: BoxFit.fitHeight,
+                  ),
+                  Positioned(
+                    left: 0.0,
+                    top: 10.0,
+                    child: Container(
+                      child: tag(),
+                    ),
+                  ),
+                  Positioned(
+                    right: 3.0,
+                    top: 5.0,
+                    child: Container(
+                      child: episode(),
+                    ),
+                  ),
+                ],
               ),
+            ),
+            SizedBox(
+              height: 5.0,
             ),
             Text(
               list[i]['name'],
               style: TextStyle(
                 color: Colors.white,
+                fontSize: 15
               ),
             ),
           ],
@@ -395,4 +405,69 @@ moviesMaker(list) {
     );
   }
   return children;
+}
+
+Widget tag() {
+  return Container(
+    padding: const EdgeInsets.only(
+      top: 3.0,
+      right: 6.0,
+      bottom: 3.0,
+      left: 3.0
+    ),
+    decoration: BoxDecoration(
+      color: Colors.black45,
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(40.0),
+        bottomRight: Radius.circular(40.0),
+      )
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          Icons.star,
+          color: Colors.yellow,
+          size: 17.0,
+        ),
+        SizedBox(
+          width: 3.0,
+        ),
+        Text(
+          '9.5',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold
+          ),
+        )
+      ],
+    )
+  );
+}
+
+Widget episode() {
+  return Container(
+      padding: const EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: BorderRadius.circular(100.0)
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Tập',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            '9999',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ],
+      )
+  );
 }
