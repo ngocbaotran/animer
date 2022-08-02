@@ -1,3 +1,4 @@
+import 'package:animer/widgets/movie_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -9,7 +10,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.black87,
       body: ListView(
         children: <Widget>[
-          imageSlider(context),
+          MovieSlider(),
           searchInput(),
           genres(context),
           movieList(context)
@@ -17,51 +18,6 @@ class HomeScreen extends StatelessWidget {
       )
     );
   }
-}
-
-Widget imageSlider(context) {
-  final imageList = [
-    'assets/images/my-hero-academia.png',
-    'assets/images/one-piece.jpeg',
-    'assets/images/overlord-ss4.jpeg',
-    'assets/images/naruto.jpeg',
-    'assets/images/bleach.jpeg',
-    'assets/images/one-punch-man.png',
-    'assets/images/jujutsu-kaisen.jpeg',
-    'assets/images/kimetsu-no-yaiba.jpeg',
-    'assets/images/fairy-tail.jpeg',
-    'assets/images/black-clover.jpeg',
-  ];
-
-  return Container(
-    height: MediaQuery.of(context).size.height / 2.5,
-    margin: EdgeInsets.symmetric(vertical: 10),
-    child: Row(
-      children: <Widget>[
-        Expanded(
-          child: Swiper(
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(1.0),
-                ),
-                elevation: 2,
-                shadowColor: Colors.white.withOpacity(0.8),
-                child: Image.asset(
-                  imageList[index],
-                  fit: BoxFit.fitHeight
-                ),
-              );
-            },
-            itemCount: imageList.length,
-            viewportFraction: 0.5,
-            scale: 0.7,
-            fade: 0.1
-          ),
-        )
-      ],
-    ),
-  );
 }
 
 Widget genres(context) {
