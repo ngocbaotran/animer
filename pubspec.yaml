@@ -26,8 +26,11 @@ dependencies:
   cupertino_icons: ^0.1.3
   flutter_swiper: ^1.1.6
   http: 0.12.2
-  connectivity: ^2.0.2
-  fluttertoast: 7.1.8
+  # Gói sqflite cung cấp các lớp và chức năng để tương tác với cơ sở dữ liệu SQLite.
+  sqflite: any
+  # Các path_provider gói cung cấp các chức năng để xác định vị trí của cơ sở dữ liệu của bạn trên hệ thống địa phương.
+  # Như TemporaryDirectory và ApplicationDocumentsDirectory.
+  path_provider: any
 
 dev_dependencies:
   flutter_test:

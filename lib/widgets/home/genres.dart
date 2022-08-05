@@ -1,24 +1,23 @@
-import 'package:animer/model/MovieModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:animer/services/movie_service.dart';
 
-class MovieSlider extends StatefulWidget {
+class Genres extends StatefulWidget {
   @override
-  _MovieSliderState createState() => _MovieSliderState();
+  _GenresState createState() => _GenresState();
 }
 
-class _MovieSliderState extends State<MovieSlider> {
-  List<MovieModel> movies;
+class _GenresState extends State<Genres> {
+  List<String> genres = [];
 
   @override
   initState() {
     super.initState();
-    getTrendingMovies();
+    getGenres();
   }
 
-  Future<void> getTrendingMovies() async {
-    movies = await fetchTrendingMovies();
+  Future<void> getGenres() async {
+    genres = await fetchTrendingMovies();
     setState(() {});
   }
 
@@ -51,22 +50,22 @@ class _MovieSliderState extends State<MovieSlider> {
                         bottom: 0,
                         left: 0,
                         child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.black87.withOpacity(0.8),
-                            backgroundBlendMode: BlendMode.srcOver
-                          ),
-                          child: Center(
-                            child: Text(
-                              movies[index].name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: Colors.black87.withOpacity(0.8),
+                                backgroundBlendMode: BlendMode.srcOver
                             ),
-                          )
+                            child: Center(
+                              child: Text(
+                                movies[index].name,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
                         ),
                       ),
                     ],

@@ -1,6 +1,5 @@
-import 'package:animer/widgets/movie_slider.dart';
+import 'package:animer/widgets/home/movie_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -11,13 +10,57 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           MovieSlider(),
-          searchInput(),
+          movieSearch(),
           genres(context),
           movieList(context)
         ],
       )
     );
   }
+}
+
+Widget movieSearch() {
+  return Container(
+    margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
+    child: Row(
+      children: <Widget>[
+        Expanded(
+            child: TextField(
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.grey,
+                ),
+                hintText: 'Search Anime',
+                hintStyle: TextStyle(
+                    color: Colors.grey
+                ),
+                filled: true,
+                fillColor: Colors.white24,
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                        color: Colors.white
+                    )
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 0,
+                ),
+              ),
+            )
+        )
+      ],
+    ),
+  );
 }
 
 Widget genres(context) {
@@ -73,50 +116,6 @@ Widget genres(context) {
             );
           })
       ),
-    ),
-  );
-}
-
-Widget searchInput() {
-  return Container(
-    margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
-    child: Row(
-      children: <Widget>[
-        Expanded(
-            child: TextField(
-              style: TextStyle(
-                color: Colors.grey,
-              ),
-              decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey,
-                ),
-                hintText: 'Search Anime',
-                hintStyle: TextStyle(
-                  color: Colors.grey
-                ),
-                filled: true,
-                fillColor: Colors.white24,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.white
-                  )
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 0,
-                ),
-              ),
-            )
-        )
-      ],
     ),
   );
 }
